@@ -26,7 +26,7 @@ def pregunta_01():
     214
 
     """
-    return sum(int(line[1]) for line in data))
+    return sum(int(line[1]) for line in data)
 
 
 def pregunta_02():
