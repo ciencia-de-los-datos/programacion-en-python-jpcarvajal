@@ -17,6 +17,11 @@ with open("data.csv","r") as file:
 data = [line.replace("\n","") for line in data ] 
 data = [line.split("\t") for line in data]
 
+columna = [line[0] for line in data]
+letras = set(line[0] for line in data)
+a=[(letra,columna.count(letra)) for letra in letras]
+a.sort(key = lambda x:x[0])
+print(a)
 
 def pregunta_01():
     """
@@ -43,8 +48,10 @@ def pregunta_02():
         ("E", 14),
     ]
 
-    """
-    return
+    """ 
+    columna = [line[0] for line in data]
+    letras = set(line[0] for line in data)
+    return ((letra,columna.count(letra)) for letra in letras)
 
 
 def pregunta_03():
