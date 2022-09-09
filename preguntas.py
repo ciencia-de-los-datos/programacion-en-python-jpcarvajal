@@ -161,12 +161,20 @@ def pregunta_06():
     """
 
     dicc = {}
-    for i in range(10):
-        dicc[i]=[]
     for line in data:
-            dicc[int(line[1])].append(line[0])
-    lista = [tuple(i) for i in dicc.items()]
-    return (lista)
+        campo=line[4].split(",")
+        for i in campo:
+            texto, numero = i.split(":")[0],int(i.split(":")[1])
+            if texto not in dicc:
+                dicc[texto]=[numero,numero]
+            else:
+                if numero > dicc[texto][1]:
+                    dicc[texto][1]=numero
+                elif numero < dicc[texto][0]:
+                    dicc[texto][0]=numero
+    lista = [(letra, v[0], v[1]) for letra, v in dicc.items()]
+    lista.sort(key = lambda x:x[0])
+    return lista
 
 def pregunta_07():
     """
@@ -192,9 +200,9 @@ def pregunta_07():
 
     dicc = {}
     for i in range(10):
-        dicc[i]=set()
+        dicc[i]=[]
     for line in data:
-            dicc[line[1]].add(line[0])
+            dicc[int(line[1])].append(line[0])
     lista = [tuple(i) for i in dicc.items()]
     return (lista)
     
