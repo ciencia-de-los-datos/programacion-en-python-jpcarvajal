@@ -22,14 +22,15 @@ dicc = {}
 for line in data:
     campo=line[4].split(",")
     for i in campo:
-        texto, numero = i.split(":")[0],int(i.split(":")[1])
+        texto = i.split(":")[0]
         if texto not in dicc:
             dicc[texto]=1
         else:
             dicc[texto]+=1
 lista = [(letra, v) for letra, v in dicc.items()]
 lista.sort(key = lambda x:x[0])
-print (lista)
+a= {k:v for (k,v) in lista}
+print (a)
 
 def pregunta_01():
     """
@@ -278,14 +279,15 @@ def pregunta_09():
     for line in data:
         campo=line[4].split(",")
         for i in campo:
-            texto, numero = i.split(":")[0],int(i.split(":")[1])
+            texto = i.split(":")[0]
             if texto not in dicc:
                 dicc[texto]=1
             else:
                 dicc[texto]+=1
     lista = [(letra, v) for letra, v in dicc.items()]
     lista.sort(key = lambda x:x[0])
-    return lista
+    a= {k:v for (k,v) in lista}
+    return a
 
 
 def pregunta_10():
