@@ -11,13 +11,14 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+from cgitb import text
+
+
 with open("data.csv","r") as file:
     data = file.readlines()
 
 data = [line.replace("\n","") for line in data ] 
 data = [line.split("\t") for line in data]
-
-
 
 def pregunta_01():
     """
@@ -160,8 +161,21 @@ def pregunta_06():
     ]
 
     """
-    return
 
+    dicc = {}
+    for line in data:
+        campo=line[4].split(",")
+        for i in campo:
+            texto, numero = i.split(":")[0],int(i.split(":")[1])
+            if texto not in dicc:
+                dicc[texto]=[numero,numero]
+            else:
+                if numero > dicc[texto][1]:
+                    dicc[texto][1]=numero
+                elif numero < dicc[texto][0]:
+                    dicc[texto][0]=numero
+    lista = [(letra, v[0], v[1]) for letra, v in dicc.items()]
+    lista.sort(key = lambda x:x[0])
 
 def pregunta_07():
     """
