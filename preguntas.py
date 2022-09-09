@@ -18,6 +18,19 @@ with open("data.csv","r") as file:
 data = [line.replace("\n","") for line in data ] 
 data = [line.split("\t") for line in data]
 
+dicc = {}
+for line in data:
+    campo=line[4].split(",")
+    for i in campo:
+        texto, numero = i.split(":")[0],int(i.split(":")[1])
+        if texto not in dicc:
+            dicc[texto]=1
+        else:
+            dicc[texto]+=1
+lista = [(letra, v) for letra, v in dicc.items()]
+lista.sort(key = lambda x:x[0])
+print (lista)
+
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
@@ -260,7 +273,19 @@ def pregunta_09():
     }
 
     """
-    return
+    
+    dicc = {}
+    for line in data:
+        campo=line[4].split(",")
+    for i in campo:
+        texto, numero = i.split(":")[0],int(i.split(":")[1])
+        if texto not in dicc:
+            dicc[texto]=1
+        else:
+            dicc[texto]+=1
+    lista = [(letra, v) for letra, v in dicc.items()]
+    lista.sort(key = lambda x:x[0])
+    return lista
 
 
 def pregunta_10():
