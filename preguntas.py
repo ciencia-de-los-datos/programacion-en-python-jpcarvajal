@@ -97,7 +97,13 @@ def pregunta_04():
     ]
 
     """
-    return
+    meses =[['%02d' % (i+1), 0] for i in range(12)]
+    for line in data:
+        meses[int(line[2][5:7]) - 1][1]+=1
+    meses=[(k,v) for [k,v] in meses]
+    print(meses)
+
+    return meses
 
 
 def pregunta_05():
