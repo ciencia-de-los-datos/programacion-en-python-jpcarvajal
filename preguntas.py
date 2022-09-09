@@ -73,7 +73,7 @@ def pregunta_03():
     for line in data:
         letras[line[0]]+=int(line[1])
     lista = [(letra, suma) for letra, suma in letras.items()]
-    print (lista)
+    return (lista)
 
 def pregunta_04():
     """
