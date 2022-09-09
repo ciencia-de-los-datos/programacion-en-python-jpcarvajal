@@ -176,6 +176,7 @@ def pregunta_06():
                     dicc[texto][0]=numero
     lista = [(letra, v[0], v[1]) for letra, v in dicc.items()]
     lista.sort(key = lambda x:x[0])
+    return lista
 
 def pregunta_07():
     """
