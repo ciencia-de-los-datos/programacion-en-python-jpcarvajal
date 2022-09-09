@@ -71,7 +71,7 @@ def pregunta_03():
     for i in columna:
         letras[i]=0
     for line in data:
-        letras[line[0]]+=line[1]
+        letras[line[0]]+=int(line[1])
     return letras.items()
 
 
