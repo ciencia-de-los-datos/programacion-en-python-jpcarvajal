@@ -65,7 +65,14 @@ def pregunta_03():
     ]
 
     """
-    return
+    columna = [line[0] for line in data]
+    columna.sort()
+    letras = {}
+    for i in columna:
+        letras[i]=0
+    for line in data:
+        letras[line[0]]+=line[1]
+    return letras.items()
 
 
 def pregunta_04():
