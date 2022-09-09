@@ -17,6 +17,8 @@ with open("data.csv","r") as file:
 data = [line.replace("\n","") for line in data ] 
 data = [line.split("\t") for line in data]
 
+
+
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
@@ -121,8 +123,20 @@ def pregunta_05():
     ]
 
     """
-    return
 
+    columna = [line[0] for line in data]
+    columna.sort()
+    dicc = {}
+    for i in columna:
+        dicc[i]=[0,10]
+    for line in data:
+        if int(line[1]) > dicc[line[0]][0]:
+            dicc[line[0]][0]=int(line[1])
+        if int(line[1]) < dicc[line[0]][1]:
+            dicc[line[0]][1]=int(line[1])
+    lista = [(letra, v[0], v[1]) for letra, v in dicc.items()]
+    return (lista)
+    
 
 def pregunta_06():
     """
