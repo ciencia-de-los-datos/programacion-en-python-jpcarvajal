@@ -18,6 +18,15 @@ with open("data.csv","r") as file:
 data = [line.replace("\n","") for line in data ] 
 data = [line.split("\t") for line in data]
 
+dicc = {}
+for i in range(10):
+    dicc[i]=set()
+for line in data:
+        dicc[int(line[1])].add(line[0])
+for k,v in dicc.items():
+    dicc[k]=list(dicc[k])
+lista = [tuple(i) for i in dicc.items()]
+print (lista)
 
 def pregunta_01():
     """
@@ -230,6 +239,7 @@ def pregunta_08():
 
     """
 
+
     dicc = {}
     for i in range(10):
         dicc[i]=set()
@@ -238,7 +248,6 @@ def pregunta_08():
     for k,v in dicc.items():
         dicc[k]=list(dicc[k])
     lista = [tuple(i) for i in dicc.items()]
-
     return lista
 
 
