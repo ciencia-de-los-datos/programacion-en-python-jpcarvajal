@@ -277,12 +277,12 @@ def pregunta_09():
     dicc = {}
     for line in data:
         campo=line[4].split(",")
-    for i in campo:
-        texto, numero = i.split(":")[0],int(i.split(":")[1])
-        if texto not in dicc:
-            dicc[texto]=1
-        else:
-            dicc[texto]+=1
+        for i in campo:
+            texto, numero = i.split(":")[0],int(i.split(":")[1])
+            if texto not in dicc:
+                dicc[texto]=1
+            else:
+                dicc[texto]+=1
     lista = [(letra, v) for letra, v in dicc.items()]
     lista.sort(key = lambda x:x[0])
     return lista
