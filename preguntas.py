@@ -72,8 +72,8 @@ def pregunta_03():
         letras[i]=0
     for line in data:
         letras[line[0]]+=int(line[1])
-    return letras.items()
-
+    lista = [(letra, suma) for letra, suma in letras.items()]
+    print (lista)
 
 def pregunta_04():
     """
