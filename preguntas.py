@@ -20,16 +20,16 @@ data = [line.split("\t") for line in data]
 
 dicc = {}
 for line in data:
-    letras=line[3].split(",")
-    for i in letras:
-        if i not in dicc:
-            dicc[i]=int(line[1])
-        else:
-            dicc[i]+=int(line[1])
+    numeros=line[4].split(",")
+    numero=sum([int(x.split(":")[1]) for x in numeros])
+    i = line[0]
+    if i not in dicc:
+        dicc[i]=numero
+    else:
+        dicc[i]+=numero
 lista = [(letra, v) for letra, v in dicc.items()]
 lista.sort(key = lambda x:x[0])
 a = {k:v for (k,v) in lista} 
-
 print (a)
 
 def pregunta_01():
@@ -362,4 +362,18 @@ def pregunta_12():
     }
 
     """
-    return
+    dicc = {}
+    for line in data:
+        numeros=line[4].split(",")
+        numero=sum([int(x.split(":")[1]) for x in numeros])
+        i = line[0]
+        if i not in dicc:
+            dicc[i]=numero
+        else:
+            dicc[i]+=numero
+    lista = [(letra, v) for letra, v in dicc.items()]
+    lista.sort(key = lambda x:x[0])
+    a = {k:v for (k,v) in lista} 
+
+    return a
+
