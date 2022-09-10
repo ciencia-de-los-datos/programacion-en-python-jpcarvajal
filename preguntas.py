@@ -18,14 +18,19 @@ with open("data.csv","r") as file:
 data = [line.replace("\n","") for line in data ] 
 data = [line.split("\t") for line in data]
 
-
-lista=[]
+dicc = {}
 for line in data:
-    a = line[0]
-    b = len(line[3].split(","))
-    c = len(line[4].split(","))
-    lista.append((a,b,c))
-print (lista)
+    letras=line[3].split(",")
+    for i in letras:
+        if i not in dicc:
+            dicc[i]=data[1]
+        else:
+            dicc[i]+=data[1]
+lista = [(letra, v) for letra, v in dicc.items()]
+lista.sort(key = lambda x:x[0])
+a = {k:v for (k,v) in lista}
+
+print (a)
 
 def pregunta_01():
     """
@@ -325,10 +330,21 @@ def pregunta_11():
         "f": 134,
         "g": 35,
     }
-
-
     """
-    return
+
+    dicc = {}
+    for line in data:
+        letras=line[3].split(",")
+        for i in letras:
+            if i not in dicc:
+                dicc[i]+=data[1]
+            else:
+                dicc[i]=data
+    lista = [(letra, v) for letra, v in dicc.items()]
+    lista.sort(key = lambda x:x[0])
+    a= {k:v for (k,v) in lista}
+
+    return a
 
 
 def pregunta_12():
