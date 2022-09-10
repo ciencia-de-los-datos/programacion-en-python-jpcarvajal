@@ -12,6 +12,12 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 
+with open("data.csv","r") as file:
+    data = file.readlines()
+
+data = [line.replace("\n","") for line in data ] 
+data = [line.split("\t") for line in data]
+
 
 def pregunta_01():
     """
@@ -21,7 +27,7 @@ def pregunta_01():
     214
 
     """
-    return
+    return sum(int(line[1]) for line in data)
 
 
 def pregunta_02():
@@ -38,8 +44,12 @@ def pregunta_02():
         ("E", 14),
     ]
 
-    """
-    return
+    """ 
+    columna = [line[0] for line in data]
+    letras = set(columna)
+    a=[(letra, columna.count(letra)) for letra in letras]
+    a.sort(key = lambda x:x[0])
+    return a
 
 
 def pregunta_03():
@@ -57,8 +67,15 @@ def pregunta_03():
     ]
 
     """
-    return
-
+    columna = [line[0] for line in data]
+    columna.sort()
+    letras = {}
+    for i in columna:
+        letras[i]=0
+    for line in data:
+        letras[line[0]]+=int(line[1])
+    lista = [(letra, suma) for letra, suma in letras.items()]
+    return (lista)
 
 def pregunta_04():
     """
@@ -82,7 +99,13 @@ def pregunta_04():
     ]
 
     """
-    return
+    meses =[['%02d' % (i+1), 0] for i in range(12)]
+    for line in data:
+        meses[int(line[2][5:7]) - 1][1]+=1
+    meses=[(k,v) for [k,v] in meses]
+    print(meses)
+
+    return meses
 
 
 def pregunta_05():
@@ -100,8 +123,20 @@ def pregunta_05():
     ]
 
     """
-    return
 
+    columna = [line[0] for line in data]
+    columna.sort()
+    dicc = {}
+    for i in columna:
+        dicc[i]=[0,10]
+    for line in data:
+        if int(line[1]) > dicc[line[0]][0]:
+            dicc[line[0]][0]=int(line[1])
+        if int(line[1]) < dicc[line[0]][1]:
+            dicc[line[0]][1]=int(line[1])
+    lista = [(letra, v[0], v[1]) for letra, v in dicc.items()]
+    return (lista)
+    
 
 def pregunta_06():
     """
@@ -125,8 +160,22 @@ def pregunta_06():
     ]
 
     """
-    return
 
+    dicc = {}
+    for line in data:
+        campo=line[4].split(",")
+        for i in campo:
+            texto, numero = i.split(":")[0],int(i.split(":")[1])
+            if texto not in dicc:
+                dicc[texto]=[numero,numero]
+            else:
+                if numero > dicc[texto][1]:
+                    dicc[texto][1]=numero
+                elif numero < dicc[texto][0]:
+                    dicc[texto][0]=numero
+    lista = [(letra, v[0], v[1]) for letra, v in dicc.items()]
+    lista.sort(key = lambda x:x[0])
+    return lista
 
 def pregunta_07():
     """
@@ -149,9 +198,15 @@ def pregunta_07():
     ]
 
     """
-    return
 
-
+    dicc = {}
+    for i in range(10):
+        dicc[i]=[]
+    for line in data:
+            dicc[int(line[1])].append(line[0])
+    lista = [tuple(i) for i in dicc.items()]
+    return (lista)
+    
 def pregunta_08():
     """
     Genere una lista de tuplas, donde el primer elemento de cada tupla contiene  el valor
@@ -174,8 +229,17 @@ def pregunta_08():
     ]
 
     """
-    return
 
+    dicc = {}
+    for i in range(10):
+        dicc[i]=set()
+    for line in data:
+            dicc[int(line[1])].add(line[0])
+    for k in dicc.keys():
+        dicc[k]=list(dicc[k])
+        dicc[k].sort()
+    lista = [tuple(i) for i in dicc.items()]
+    return (lista)
 
 def pregunta_09():
     """
@@ -197,7 +261,20 @@ def pregunta_09():
     }
 
     """
-    return
+    
+    dicc = {}
+    for line in data:
+        campo=line[4].split(",")
+        for i in campo:
+            texto = i.split(":")[0]
+            if texto not in dicc:
+                dicc[texto]=1
+            else:
+                dicc[texto]+=1
+    lista = [(letra, v) for letra, v in dicc.items()]
+    lista.sort(key = lambda x:x[0])
+    a= {k:v for (k,v) in lista}
+    return a
 
 
 def pregunta_10():
@@ -215,11 +292,15 @@ def pregunta_10():
         ("E", 2, 3),
         ("E", 3, 3),
     ]
-
-
     """
-    return
 
+    lista=[]
+    for line in data:
+        a = line[0]
+        b = len(line[3].split(","))
+        c = len(line[4].split(","))
+        lista.append((a,b,c))
+    return (lista)
 
 def pregunta_11():
     """
@@ -236,10 +317,21 @@ def pregunta_11():
         "f": 134,
         "g": 35,
     }
-
-
     """
-    return
+
+    dicc = {}
+    for line in data:
+        letras=line[3].split(",")
+        for i in letras:
+            if i not in dicc:
+                dicc[i]=int(line[1])
+            else:
+                dicc[i]+=int(line[1])
+    lista = [(letra, v) for letra, v in dicc.items()]
+    lista.sort(key = lambda x:x[0])
+    a = {k:v for (k,v) in lista} 
+
+    return a
 
 
 def pregunta_12():
@@ -257,4 +349,18 @@ def pregunta_12():
     }
 
     """
-    return
+    dicc = {}
+    for line in data:
+        numeros=line[4].split(",")
+        numero=sum([int(x.split(":")[1]) for x in numeros])
+        i = line[0]
+        if i not in dicc:
+            dicc[i]=numero
+        else:
+            dicc[i]+=numero
+    lista = [(letra, v) for letra, v in dicc.items()]
+    lista.sort(key = lambda x:x[0])
+    a = {k:v for (k,v) in lista} 
+
+    return a
+
