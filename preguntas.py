@@ -23,12 +23,12 @@ for line in data:
     letras=line[3].split(",")
     for i in letras:
         if i not in dicc:
-            dicc[i]=data[1]
+            dicc[i]=int(line[1])
         else:
-            dicc[i]+=data[1]
+            dicc[i]+=int(line[1])
 lista = [(letra, v) for letra, v in dicc.items()]
 lista.sort(key = lambda x:x[0])
-a = {k:v for (k,v) in lista}
+a = {k:v for (k,v) in lista} 
 
 print (a)
 
