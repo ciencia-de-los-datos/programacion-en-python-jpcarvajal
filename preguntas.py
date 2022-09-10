@@ -18,19 +18,6 @@ with open("data.csv","r") as file:
 data = [line.replace("\n","") for line in data ] 
 data = [line.split("\t") for line in data]
 
-dicc = {}
-for line in data:
-    numeros=line[4].split(",")
-    numero=sum([int(x.split(":")[1]) for x in numeros])
-    i = line[0]
-    if i not in dicc:
-        dicc[i]=numero
-    else:
-        dicc[i]+=numero
-lista = [(letra, v) for letra, v in dicc.items()]
-lista.sort(key = lambda x:x[0])
-a = {k:v for (k,v) in lista} 
-print (a)
 
 def pregunta_01():
     """
